@@ -1,0 +1,18 @@
+/**
+ * index.css
+ * @author 邦彦<bangyan@taobao.com>
+ */
+.apm-viewport {
+	background: #ccc;
+	width: 640px;
+	overflow-x: visible;
+	overflow-y: hidden;
+}
+
+.apm-viewport-iphone4 {
+	height: 960px;
+}
+
+.apm-viewport-iphone5 {
+	height: 1136px;
+}
