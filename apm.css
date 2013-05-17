@@ -1,0 +1,1158 @@
+/**
+ * apm.css
+ * @author 邦彦<bangyan@taobao.com>
+ */
+/* = 全局样式
+----------------------------------------------- */
+.apm-base * {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+	list-style: none;
+}
+
+.apm-base {
+	background: #fff;
+	color: #333;
+	font: 12px/1.5 tahoma, arial;
+	-webkit-text-size-adjust: none;
+}
+
+.apm-base a:link,
+.apm-base a:visited {
+	color: #21759b;
+	text-decoration: none;
+}
+
+.apm-base a:active,
+.apm-base a:hover {
+	color: #f60;
+	text-decoration: none;
+}
+
+/* = 清除浮动
+----------------------------------------------- */
+.apm-clearfix:after {
+	content: '\20';
+	display: block;
+	height: 0;
+	clear: both;
+}
+
+.apm-clearfix {
+	*zoom: 1;
+}
+
+/* = remove inner oddities for firefox
+----------------------------------------------- */
+.apm-base button::-moz-focus-inner,
+.apm-base input::-moz-focus-inner {
+	border: none;
+	padding: 0;
+}
+
+/* = 表单样式
+----------------------------------------------- */
+.apm-form-field {
+	margin-bottom: 12px;
+}
+
+.apm-form-label {
+	display: inline-block;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+
+.apm-form-required {
+	color: #c00;
+	font-weight: normal;
+	padding: 0 5px;
+}
+
+.apm-form-help {
+	color: #999;
+	display: inline-block;
+	height: 30px;
+	line-height: 29px;
+	padding: 0 5px;
+	vertical-align: middle;
+}
+
+.apm-form-vetical-top {
+	vertical-align: top !important;
+}
+
+/* = input[type=text], textarea, select
+----------------------------------------------- */
+.apm-form-text,
+.apm-form-textarea,
+.apm-form-select {
+	background: #fff;
+	border: 1px solid #d9d9d9;
+	border-top: 1px solid #c0c0c0;
+	display: inline-block;
+	font-size: 12px;
+	margin: 0;
+	vertical-align: middle;
+	border-radius: 1px;
+}
+
+.apm-form-text:hover,
+.apm-form-textarea:hover,
+.apm-form-select:hover,
+.apm-form-text:focus,
+.apm-form-textarea:focus,
+.apm-form-select:focus {
+	border-color: #b9b9b9;
+	border-top: 1px solid #a0a0a0;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.apm-form-text {
+	height: 28px;
+	padding: 0 6px;
+}
+
+.apm-form-textarea {
+	padding: 6px;
+	resize: vertical;
+}
+
+.apm-form-select {
+	padding: 5px;
+}
+
+.apm-form-text-readonly,
+.apm-form-select-readonly {
+	color: #999;
+	background: #fcfcfc;
+}
+
+.apm-form-text-disabled,
+.apm-form-select-disabled {
+	color: #666;
+	background: #eee;
+}
+
+/* = input[type=radio], input[type=checkbox]
+----------------------------------------------- */
+.apm-form-radio,
+.apm-form-checkbox {
+	height: 30px;
+	line-height: 29px;
+	vertical-align: middle;
+}
+
+.apm-form-radio input,
+.apm-form-checkbox input {
+	vertical-align: middle;
+	margin: 0 5px 0 0;
+}
+
+/* = form-mini
+----------------------------------------------- */
+.apm-form-mini .apm-form-text {
+	height: 24px;
+}
+
+.apm-form-mini .apm-form-select {
+	padding: 4px;
+}
+
+/* = 按钮样式
+----------------------------------------------- */
+.apm-button {
+	border-width: 1px;
+	border-style: solid;
+	background-repeat: repeat-x;
+	color: #fff !important;
+	cursor: pointer;
+	display: inline-block;
+	font-family: arial, sans-serif;
+	font-weight: bold;
+	vertical-align: middle;
+	outline: 0;
+	margin: 0;
+	border-radius: 2px;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.apm-button:active {
+	-webkit-box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* = button with color
+----------------------------------------------- */
+.apm-button-blue {
+	border-color: #3079ed;
+	background-color: #4c8ffc;
+}
+
+.apm-button-blue:not(.apm-button-disabled):hover,
+.apm-button-blue:not(.apm-button-disabled):focus,
+.apm-button-blue:not(.apm-button-disabled):active {
+	background-color: #367cfc;
+}
+
+.apm-button-red {
+	border-color: #ab4134;
+	background-color: #dd4b39;
+}
+
+.apm-button-red:not(.apm-button-disabled):hover,
+.apm-button-red:not(.apm-button-disabled):focus,
+.apm-button-red:not(.apm-button-disabled):active {
+	background-color: #de2915;
+}
+
+.apm-button-gray {
+	border-color: #ccc;
+	background-color: #f5f5f5;
+	color: #666 !important;
+}
+
+.apm-button-gray:not(.apm-button-disabled):hover,
+.apm-button-gray:not(.apm-button-disabled):focus,
+.apm-button-gray:not(.apm-button-disabled):active {
+	background-color: #f0f0f0;
+}
+
+/* = button with disabled
+----------------------------------------------- */
+.apm-button-disabled {
+	cursor: default;
+	opacity: 0.65;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+.apm-button-disabled:hover,
+.apm-button-disabled:focus,
+.apm-button-disabled:active {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+
+/* = button size, medium as default
+----------------------------------------------- */
+.apm-button {
+	height: 30px;
+	line-height: 29px;
+	padding: 0 10px;
+}
+
+a.apm-button {
+	height: 28px;
+	line-height: 28px;
+}
+
+.apm-button-large {
+	height: 34px;
+	line-height: 33px;
+	padding: 0 12px;
+	font-size: 14px;
+}
+
+a.apm-button-large {
+	height: 32px;
+	line-height: 32px;
+}
+
+.apm-button-small {
+	height: 26px;
+	line-height: 25px;
+	padding: 0 8px;
+}
+
+a.apm-button-small {
+	height: 24px;
+	line-height: 24px;
+}
+
+/* = 图标样式
+----------------------------------------------- */
+.apm-icon {
+	background-image: url(http://img04.taobaocdn.com/tps/i4/T1hyVYXsJaXXcIVv2D-469-159.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	line-height: 14px;
+	overflow: hidden;
+	vertical-align: top;
+}
+
+.apm-icon-glass {
+	background-position: 0 0;
+}
+
+.apm-icon-music {
+	background-position: -24px 0;
+}
+
+.apm-icon-search {
+	background-position: -48px 0;
+}
+
+.apm-icon-envelope {
+	background-position: -72px 0;
+}
+
+.apm-icon-heart {
+	background-position: -96px 0;
+}
+
+.apm-icon-star {
+	background-position: -120px 0;
+}
+
+.apm-icon-star-empty {
+	background-position: -144px 0;
+}
+
+.apm-icon-user {
+	background-position: -168px 0;
+}
+
+.apm-icon-film {
+	background-position: -192px 0;
+}
+
+.apm-icon-th-large {
+	background-position: -216px 0;
+}
+
+.apm-icon-th {
+	background-position: -240px 0;
+}
+
+.apm-icon-th-list {
+	background-position: -264px 0;
+}
+
+.apm-icon-ok {
+	background-position: -288px 0;
+}
+
+.apm-icon-remove {
+	background-position: -312px 0;
+}
+
+.apm-icon-zoom-in {
+	background-position: -336px 0;
+}
+
+.apm-icon-zoom-out {
+	background-position: -360px 0;
+}
+
+.apm-icon-off {
+	background-position: -384px 0;
+}
+
+.apm-icon-signal {
+	background-position: -408px 0;
+}
+
+.apm-icon-cog {
+	background-position: -432px 0;
+}
+
+.apm-icon-trash {
+	background-position: -456px 0;
+}
+
+.apm-icon-home {
+	background-position: 0 -24px;
+}
+
+.apm-icon-file {
+	background-position: -24px -24px;
+}
+
+.apm-icon-time {
+	background-position: -48px -24px;
+}
+
+.apm-icon-road {
+	background-position: -72px -24px;
+}
+
+.apm-icon-download-alt {
+	background-position: -96px -24px;
+}
+
+.apm-icon-download {
+	background-position: -120px -24px;
+}
+
+.apm-icon-upload {
+	background-position: -144px -24px;
+}
+
+.apm-icon-inbox {
+	background-position: -168px -24px;
+}
+
+.apm-icon-play-circle {
+	background-position: -192px -24px;
+}
+
+.apm-icon-repeat {
+	background-position: -216px -24px;
+}
+
+.apm-icon-refresh {
+	background-position: -240px -24px;
+}
+
+.apm-icon-list-alt {
+	background-position: -264px -24px;
+}
+
+.apm-icon-lock {
+	background-position: -287px -24px;
+}
+
+.apm-icon-flag {
+	background-position: -312px -24px;
+}
+
+.apm-icon-headphones {
+	background-position: -336px -24px;
+}
+
+.apm-icon-volume-off {
+	background-position: -360px -24px;
+}
+
+.apm-icon-volume-down {
+	background-position: -384px -24px;
+}
+
+.apm-icon-volume-up {
+	background-position: -408px -24px;
+}
+
+.apm-icon-qrcode {
+	background-position: -432px -24px;
+}
+
+.apm-icon-barcode {
+	background-position: -456px -24px;
+}
+
+.apm-icon-tag {
+	background-position: 0 -48px;
+}
+
+.apm-icon-tags {
+	background-position: -25px -48px;
+}
+
+.apm-icon-book {
+	background-position: -48px -48px;
+}
+
+.apm-icon-bookmark {
+	background-position: -72px -48px;
+}
+
+.apm-icon-print {
+	background-position: -96px -48px;
+}
+
+.apm-icon-camera {
+	background-position: -120px -48px;
+}
+
+.apm-icon-font {
+	background-position: -144px -48px;
+}
+
+.apm-icon-bold {
+	background-position: -167px -48px;
+}
+
+.apm-icon-italic {
+	background-position: -192px -48px;
+}
+
+.apm-icon-text-height {
+	background-position: -216px -48px;
+}
+
+.apm-icon-text-width {
+	background-position: -240px -48px;
+}
+
+.apm-icon-align-left {
+	background-position: -264px -48px;
+}
+
+.apm-icon-align-center {
+	background-position: -288px -48px;
+}
+
+.apm-icon-align-right {
+	background-position: -312px -48px;
+}
+
+.apm-icon-align-justify {
+	background-position: -336px -48px;
+}
+
+.apm-icon-list {
+	background-position: -360px -48px;
+}
+
+.apm-icon-indent-left {
+	background-position: -384px -48px;
+}
+
+.apm-icon-indent-right {
+	background-position: -408px -48px;
+}
+
+.apm-icon-facetime-video {
+	background-position: -432px -48px;
+}
+
+.apm-icon-picture {
+	background-position: -456px -48px;
+}
+
+.apm-icon-pencil {
+	background-position: 0 -72px;
+}
+
+.apm-icon-map-marker {
+	background-position: -24px -72px;
+}
+
+.apm-icon-adjust {
+	background-position: -48px -72px;
+}
+
+.apm-icon-tint {
+	background-position: -72px -72px;
+}
+
+.apm-icon-edit {
+	background-position: -96px -72px;
+}
+
+.apm-icon-share {
+	background-position: -120px -72px;
+}
+
+.apm-icon-check {
+	background-position: -144px -72px;
+}
+
+.apm-icon-move {
+	background-position: -168px -72px;
+}
+
+.apm-icon-step-backward {
+	background-position: -192px -72px;
+}
+
+.apm-icon-fast-backward {
+	background-position: -216px -72px;
+}
+
+.apm-icon-backward {
+	background-position: -240px -72px;
+}
+
+.apm-icon-play {
+	background-position: -264px -72px;
+}
+
+.apm-icon-pause {
+	background-position: -288px -72px;
+}
+
+.apm-icon-stop {
+	background-position: -312px -72px;
+}
+
+.apm-icon-forward {
+	background-position: -336px -72px;
+}
+
+.apm-icon-fast-forward {
+	background-position: -360px -72px;
+}
+
+.apm-icon-step-forward {
+	background-position: -384px -72px;
+}
+
+.apm-icon-eject {
+	background-position: -408px -72px;
+}
+
+.apm-icon-chevron-left {
+	background-position: -432px -72px;
+}
+
+.apm-icon-chevron-right {
+	background-position: -456px -72px;
+}
+
+.apm-icon-plus-sign {
+	background-position: 0 -96px;
+}
+
+.apm-icon-minus-sign {
+	background-position: -24px -96px;
+}
+
+.apm-icon-remove-sign {
+	background-position: -48px -96px;
+}
+
+.apm-icon-ok-sign {
+	background-position: -72px -96px;
+}
+
+.apm-icon-question-sign {
+	background-position: -96px -96px;
+}
+
+.apm-icon-info-sign {
+	background-position: -120px -96px;
+}
+
+.apm-icon-screenshot {
+	background-position: -144px -96px;
+}
+
+.apm-icon-remove-circle {
+	background-position: -168px -96px;
+}
+
+.apm-icon-ok-circle {
+	background-position: -192px -96px;
+}
+
+.apm-icon-ban-circle {
+	background-position: -216px -96px;
+}
+
+.apm-icon-arrow-left {
+	background-position: -240px -96px;
+}
+
+.apm-icon-arrow-right {
+	background-position: -264px -96px;
+}
+
+.apm-icon-arrow-up {
+	background-position: -289px -96px;
+}
+
+.apm-icon-arrow-down {
+	background-position: -312px -96px;
+}
+
+.apm-icon-share-alt {
+	background-position: -336px -96px;
+}
+
+.apm-icon-resize-full {
+	background-position: -360px -96px;
+}
+
+.apm-icon-resize-small {
+	background-position: -384px -96px;
+}
+
+.apm-icon-plus {
+	background-position: -408px -96px;
+}
+
+.apm-icon-minus {
+	background-position: -433px -96px;
+}
+
+.apm-icon-asterisk {
+	background-position: -456px -96px;
+}
+
+.apm-icon-exclamation-sign {
+	background-position: 0 -120px;
+}
+
+.apm-icon-gift {
+	background-position: -24px -120px;
+}
+
+.apm-icon-leaf {
+	background-position: -48px -120px;
+}
+
+.apm-icon-fire {
+	background-position: -72px -120px;
+}
+
+.apm-icon-eye-open {
+	background-position: -96px -120px;
+}
+
+.apm-icon-eye-close {
+	background-position: -120px -120px;
+}
+
+.apm-icon-warning-sign {
+	background-position: -144px -120px;
+}
+
+.apm-icon-plane {
+	background-position: -168px -120px;
+}
+
+.apm-icon-calendar {
+	background-position: -192px -120px;
+}
+
+.apm-icon-random {
+	width: 16px;
+	background-position: -216px -120px;
+}
+
+.apm-icon-comment {
+	background-position: -240px -120px;
+}
+
+.apm-icon-magnet {
+	background-position: -264px -120px;
+}
+
+.apm-icon-chevron-up {
+	background-position: -288px -120px;
+}
+
+.apm-icon-chevron-down {
+	background-position: -313px -119px;
+}
+
+.apm-icon-retweet {
+	background-position: -336px -120px;
+}
+
+.apm-icon-shopping-cart {
+	background-position: -360px -120px;
+}
+
+.apm-icon-folder-close {
+	width: 16px;
+	background-position: -384px -120px;
+}
+
+.apm-icon-folder-open {
+	width: 16px;
+	background-position: -408px -120px;
+}
+
+.apm-icon-resize-vertical {
+	background-position: -432px -119px;
+}
+
+.apm-icon-resize-horizontal {
+	background-position: -456px -118px;
+}
+
+.apm-icon-hdd {
+	background-position: 0 -144px;
+}
+
+.apm-icon-bullhorn {
+	background-position: -24px -144px;
+}
+
+.apm-icon-bell {
+	background-position: -48px -144px;
+}
+
+.apm-icon-certificate {
+	background-position: -72px -144px;
+}
+
+.apm-icon-thumbs-up {
+	background-position: -96px -144px;
+}
+
+.apm-icon-thumbs-down {
+	background-position: -120px -144px;
+}
+
+.apm-icon-hand-right {
+	background-position: -144px -144px;
+}
+
+.apm-icon-hand-left {
+	background-position: -168px -144px;
+}
+
+.apm-icon-hand-up {
+	background-position: -192px -144px;
+}
+
+.apm-icon-hand-down {
+	background-position: -216px -144px;
+}
+
+.apm-icon-circle-arrow-right {
+	background-position: -240px -144px;
+}
+
+.apm-icon-circle-arrow-left {
+	background-position: -264px -144px;
+}
+
+.apm-icon-circle-arrow-up {
+	background-position: -288px -144px;
+}
+
+.apm-icon-circle-arrow-down {
+	background-position: -312px -144px;
+}
+
+.apm-icon-globe {
+	background-position: -336px -144px;
+}
+
+.apm-icon-wrench {
+	background-position: -360px -144px;
+}
+
+.apm-icon-tasks {
+	background-position: -384px -144px;
+}
+
+.apm-icon-filter {
+	background-position: -408px -144px;
+}
+
+.apm-icon-briefcase {
+	background-position: -432px -144px;
+}
+
+.apm-icon-fullscreen {
+	background-position: -456px -144px;
+}
+
+/* = 可视区样式
+----------------------------------------------- */
+.apm-viewport {
+	background: #ccc;
+	width: 640px;
+	height: 960px;
+	position: relative;
+	margin: 0 auto;
+}
+
+.apm-viewport img {
+	max-width: 640px;
+}
+
+.apm-area-head,
+.apm-area-body,
+.apm-area-foot {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+.apm-area-head {
+	background: #666;
+	top: 0;
+	z-index: 2147483647;
+}
+
+.apm-area-foot {
+	background: #666;
+	bottom: 0;
+	z-index: 2147483647;
+}
+
+.apm-area-body {
+	background: #999;
+	top: 0;
+	bottom: 0;
+}
+
+.apm-area-item {
+	background-color: rgba(100, 255, 255, 0.5);
+	cursor: default;
+	display: block;
+	position: absolute;
+	min-width: 25px;
+	min-height: 25px;
+}
+
+.apm-area-select {
+	background-color: rgba(102, 255, 255, 0.4);
+	display: block;
+	position: absolute;
+	z-index: 2147483647 !important;
+}
+
+.apm-area-mask {
+	background-color: rgba(26, 169, 92, 0.4);
+	cursor: crosshair;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 2147483647 !important;
+}
+
+.apm-area-border {
+	border: 1px solid #000;
+	cursor: move;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+.apm-area-select .apm-area-border {
+	cursor: default;
+}
+
+.apm-area-resize {
+	background: #000;
+	cursor: se-resize;
+	height: 8px;
+	width: 8px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+.apm-area-action {
+	background: #000;
+	color: #fff;
+	cursor: pointer;
+	width: 24px;
+	text-align: center;
+	padding: 2px 0;
+	position: absolute;
+	top: 0;
+	right: -23px;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.apm-area-item:hover .apm-area-action {
+	visibility: visible;
+	opacity: 1;
+	-moz-transition: opacity 0.5s;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.apm-area-edit,
+.apm-area-remove {
+	display: inline-block;
+	width: 24px;
+	height: 22px;
+}
+
+.apm-area-edit i,
+.apm-area-remove i {
+	margin: 4px auto;
+}
+
+/* = 图片上传按钮样式
+----------------------------------------------- */
+.apm-area-file {
+	background: url(http://img01.taobaocdn.com/tps/i1/T1xGXkXoKzwJOdQE7.-14-12.gif) no-repeat center center;
+	display: inline-block;
+	width: 14px;
+	height: 12px;
+	overflow: hidden;
+	position: relative;
+	vertical-align: middle;
+}
+
+.apm-area-file input {
+	cursor: pointer;
+	opacity: 0;
+	font-size: 100px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.apm-area-admin {
+	background: #1aa95c;
+	width: 198px;
+	height: 26px;
+	padding: 0 5px;
+	overflow: hidden;
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 2147483647 !important;
+	cursor: default;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.apm-module .apm-area-admin {
+	visibility: visible;
+	opacity: 1;
+	-moz-transition: opacity 0.5s;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.apm-area-admin span {
+	cursor: pointer;
+	width: 22px;
+	height: 26px;
+	float: left;
+}
+
+.apm-area-admin i {
+	margin: 6px 4px;
+}
+
+.apm-area-admin .apm-module-add b {
+	border-right-color: #8bd1a4;
+}
+
+.apm-area-form {
+	background: #fff;
+	border: 1px solid #dfdfdf;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 194px;
+	padding: 15px 15px 5px;
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+	display: none;
+}
+
+.apm-area-form .apm-form-field {
+	display: block;
+	margin-bottom: 10px;
+	position: relative;
+}
+
+.apm-area-form .apm-form-text {
+	width: 180px;
+}
+
+.apm-area-form .apm-area-file {
+	position: absolute;
+	top: 7px;
+	right: 5px;
+}
+
+.apm-area-form .apm-button {
+	float: left;
+	margin-right: 5px;
+}
+
+/* = 预置模块：图片热区选项样式
+----------------------------------------------- */
+.apm-area-option-form {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: #fff;
+	padding: 20px 30px;
+}
+
+.apm-area-option-form .apm-form-text {
+	width: 220px;
+}
+
+.apm-area-option-file {
+	position: relative;
+	width: 234px;
+}
+
+.apm-area-option-file .apm-area-file {
+	position: absolute;
+	top: 9px;
+	right: 5px;
+}
+
+.apm-area-option-submit {
+	display: none;
+}
+
+/**
+ * apm-admin
+ */
+.admin {
+	position: absolute;
+	left: 50%;
+	top: 80px;
+	margin-left: -441px;
+	width: 120px;
+}
+
+.admin-menu li {
+	margin-bottom: 1px;
+}
+
+.admin-menu .head-add,
+.admin-menu .foot-add {
+	background: rgba(210, 210, 210, 0.8);
+	display: inline-block;
+	width: 120px;
+	height: 80px;
+	line-height: 80px;
+	text-align: center;
+	overflow: hidden;
+	position: relative;
+}
+
+.admin-menu .head-add:hover,
+.admin-menu .foot-add:hover {
+	background: rgba(210, 210, 210, 1);
+}
+
+.admin-menu .head-add input,
+.admin-menu .foot-add input {
+	opacity: 0;
+	filter: alpha(opacity=0);
+	font-size: 100px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.admin-menu button {
+	background: rgba(26, 169, 92, 0.8);
+	color: #fff;
+	font-size: 12px;
+	width: 120px;
+	height: 80px;
+}
+
+.admin-menu button:hover {
+	background: rgba(26, 169, 92, 1);
+}

@@ -1,42 +1,69 @@
 /**
- * 图片热区渲染
- * 注：渲染设计状态下图片热区
+ * 热区组件
  * @author 邦彦<bangyan@taobao.com>
  */
-define(function (require) {
+(function ($) {
 
-	var $ = require('jquery');
-	var mustache = require('mustache');
-	var template = require('template');
-	var page = require('page');
+	// 节点模板
+	var TEMPLATE_AREA_ITEM = '<span class="apm-area-border"></span>' +
+		'<span class="apm-area-resize"></span>' +
+		'<span class="apm-area-action">' +
+		'	<span class="apm-area-edit" title="编辑"><i class="apm-icon apm-icon-pencil"></i></span>' +
+		'	<span class="apm-area-remove" title="删除"><i class="apm-icon apm-icon-remove"></i></span>' +
+		'</span>' +
+		'</span>' +
+		'<form class="apm-base apm-form apm-form-mini apm-area-form">' +
+		'	<span class="apm-form-field" title="链接到">' +
+		'		<select class="apm-form-select apm-area-field-href" required="required">' +
+		'		    <option value="test.jpg">test.jpg</option>' +
+		'       </select>' +
+		'	</span>' +
+		'	<span class="apm-form-field" title="切换效果">' +
+		'		<select class="apm-form-select apm-area-field-transition" required="required">' +
+		'			<option value="slide">滑动</option>' +
+		'			<option value="slideUp">向上滑动</option>' +
+		'			<option value="slideDown">向下滑动</option>' +
+		'			<option value="pop">抛出</option>' +
+		'			<option value="fade">淡入淡出</option>' +
+		'			<option value="flip">立体翻转</option>' +
+		'		</select>' +
+		'	</span>' +
+		'	<span class="apm-form-field" title="标题（可选）">' +
+		'		<input class="apm-form-text apm-area-field-title" type="text" value="{{title}}" placeholder="标题（可选）">' +
+		'	</span>' +
+		'	<span class="apm-form-field apm-clearfix">' +
+		'		<button class="apm-button apm-button-red apm-button-small" type="submit">确定</button>' +
+		'		<button class="apm-button apm-button-gray apm-button-small" type="button">取消</button>' +
+		'	</span>' +
+		'</form>';
 
-	return {
+	var apm = {
 
 		// 框选创建热区
-		__select: function (wrap) {
+		__select: function (container) {
 
 			var self = this,
 				doc = $(document),
-				mask = $('<div class="press-area-mask" title="按住鼠标左键拖选图片区域" style="display:none"></div>'),
-				select = $('<span class="press-area-select">' +
-					'   <span class="press-area-border"></span>' +
+				mask = $('<div class="apm-area-mask" title="按住鼠标左键拖选图片区域" style="display:none"></div>'),
+				select = $('<span class="apm-area-select">' +
+					'   <span class="apm-area-border"></span>' +
 					'</span>'),
-				area = $('<a class="press-area-item"></a>'),
+				area = $('<a class="apm-area-item"></a>'),
 				parent = {
-					left: wrap.offset().left,
-					top: wrap.offset().top,
-					width: wrap.width(),
-					height: wrap.height()
+					left: container.offset().left,
+					top: container.offset().top,
+					width: container.width(),
+					height: container.height()
 				},
 				selecting = false;
 
 			// 创建遮挡层
-			wrap.append(mask.fadeIn('fast', function () {
+			container.append(mask.fadeIn('fast', function () {
 				$(this).show();
 			}));
 
 			// 鼠标按下准备框选
-			wrap.on('mousedown.select', function (e) {
+			container.on('mousedown.select', function (e) {
 
 				e.preventDefault();
 				select.css({
@@ -78,7 +105,7 @@ define(function (require) {
 				self.__build(area);
 				area.attr({
 					href: '#',
-					target: '_blank',
+					transition: 'slide',
 					title: ''
 				});
 				area.css({
@@ -87,7 +114,7 @@ define(function (require) {
 					width: Math.max(select.width()),
 					height: Math.max(select.height())
 				});
-				wrap.append(area);
+				container.append(area);
 
 				// 移除框选
 				mask.fadeOut('fast', function () {
@@ -96,7 +123,7 @@ define(function (require) {
 				select.remove();
 
 				// 解除选区绑定
-				wrap.unbind('mousedown.select');
+				container.unbind('mousedown.select');
 				$(this).unbind('mousemove.select');
 				$(this).unbind('mouseup.select');
 
@@ -111,20 +138,11 @@ define(function (require) {
 				attr = self.__attr(area), form;
 
 			// 创建编辑表单
-			area.append(mustache.render(template.TEMPLATE_AREA_ITEM, attr));
-			form = area.find('.press-area-form');
+			area.append(Mustache.render(TEMPLATE_AREA_ITEM, attr));
+			form = area.find('.apm-area-form');
 
 			// 拖动和缩放
-			area.jqDrag('.press-area-border').jqResize('.press-area-resize');
-			area.on('jqDnRstart', function () {
-				if (area.children('img').length > 0) {
-					var img = area.find('img');
-					area.css({
-						'max-width': img.width(),
-						'max-height': img.height()
-					});
-				}
-			});
+			area.jqDrag('.apm-area-border').jqResize('.apm-area-resize');
 
 			// 禁止热区默认事件
 			area.on('click', function (e) {
@@ -135,14 +153,14 @@ define(function (require) {
 			});
 
 			// 编辑热区
-			area.on('click', '.press-area-edit', function () {
-				area.siblings().find('.press-area-form').hide();
+			area.on('click', '.apm-area-edit', function () {
+				area.siblings().find('.apm-area-form').hide();
 				form.fadeToggle('fast');
 				self.__reset(area);
 			});
 
 			// 删除热区
-			area.on('click', '.press-area-remove', function () {
+			area.on('click', '.apm-area-remove', function () {
 				confirm('确定要删除热区吗？') && area.remove();
 			});
 
@@ -155,12 +173,12 @@ define(function (require) {
 			});
 
 			// 取消热区编辑表单
-			area.on('click', '.press-button-gray', function () {
+			area.on('click', '.apm-button-gray', function () {
 				form.fadeOut('fast');
 			});
 
 			// 恢复字段全选功能，防止和拖拽功能冲突
-			form.on('keyup', '.press-form-text', function (e) {
+			form.on('keyup', '.apm-form-text', function (e) {
 				if (e.ctrlKey && e.keyCode === 65) {
 					$(this).select();
 				}
@@ -174,9 +192,8 @@ define(function (require) {
 			var pos = area.position();
 			return {
 				href: area.attr('href'),
-				target: area.attr('target'),
+				transition: area.attr('data-transition'),
 				title: area.attr('title'),
-				img: area.find('img').attr('src'),
 				left: pos.left,
 				top: pos.top,
 				width: area.width(),
@@ -188,139 +205,31 @@ define(function (require) {
 		// 重设热区编辑表单
 		__reset: function (area) {
 
-			var form = area.find('.press-area-form'),
+			var form = area.find('.apm-area-form'),
 				attr = this.__attr(area),
-				index = attr.target === '_blank' ? 0 : 1;
+				href = form.find('.apm-area-field-href'),
+				transition = form.find('.apm-area-field-transition');
 
 			// 以此设置表单数据
-			form.find('.press-area-field-href').val(attr.href);
-			form.find('.press-area-field-target').val(attr.target);
-			form.find('.press-area-field-target').attr('selectedIndex', index);
-			form.find('.press-area-field-title').val(attr.title);
-			form.find('.press-area-field-img').val(attr.img);
+			href[0].selectedIndex = href.find('option[value=' + attr.href + ']').index();
+			transition[0].selectedIndex = transition.find('option[value=' + attr.transition + ']').index();
+			form.find('.apm-area-field-title').val(attr.title);
 
 		},
 
 		// 回写热区编辑表单数据
 		__edit: function (area) {
 
-			var form = area.find('.press-area-form'),
-				href = form.find('.press-area-field-href').val(),
-				target = form.find('.press-area-field-target').val(),
-				title = form.find('.press-area-field-title').val(),
-				img = form.find('.press-area-field-img').val();
-
-			// 设置链接图片
-			if ($.trim(img)) {
-				if (area.children('img').length === 0) {
-					area.prepend('<img src="' + $.trim(img) + '" alt="">');
-				} else {
-					area.find('img').attr('src', $.trim(img));
-				}
-			} else {
-				area.children('img').remove();
-			}
+			var form = area.find('.apm-area-form'),
+				href = form.find('.apm-area-field-href').val(),
+				transition = form.find('.apm-area-field-transition').val(),
+				title = form.find('.apm-area-field-title').val();
 
 			// 设置链接属性
 			area.attr({
-				href: $.trim(href),
-				target: $.trim(target),
-				title: $.trim(title)
-			});
-
-		},
-
-		// 获取设置对话框内容
-		__getContent: function (module) {
-
-			var img = module.find('.press-area-wrap').children('img').attr('src'),
-				bgcolor = module.css('background-color'),
-				bgimg = module.css('background-image'),
-				hex = function (x) {
-					return ('0' + parseInt(x).toString(16)).slice(-2);
-				};
-
-			// 格式化背景颜色
-			bgcolor = bgcolor.match(/^rgb?\((\d+),\s*(\d+),\s*(\d+)\)$/);
-			bgcolor = bgcolor ? '#' + hex(bgcolor[1]) + hex(bgcolor[2]) + hex(bgcolor[3]) : bgcolor;
-
-			// 格式化背景图片
-			bgimg = bgimg !== 'none' ? bgimg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '') : '';
-
-			return $(mustache.render(template.TEMPLATE_AREA_OPTION, {
-				img: img ? img : '',
-				bgcolor: bgcolor ? bgcolor.toUpperCase() : '',
-				bgimg: bgimg ? bgimg : ''
-			}));
-
-		},
-
-		// 回写设置选项数据
-		__reflow: function (module) {
-
-			var wrap = module.find('.press-area-wrap'),
-				trigger = wrap.children('img'),
-				img = $('.press-area-option-img').val(),
-				bgcolor = $('.press-area-option-bgcolor').val(),
-				bgimg = $('.press-area-option-bgimg').val();
-
-			// 等待主图加载，并重置容器尺寸
-			var onload = function (trigger) {
-				page.loading();
-				return trigger.load(function () {
-					wrap.css({
-						width: trigger.width(),
-						height: trigger.height()
-					});
-					page.unloading();
-				});
-			};
-
-			// 设置热区容器、主图
-			if ($.trim(img)) {
-				if (trigger.length === 0) {
-					trigger = $('<img src="' + $.trim(img) + '" alt="">');
-					wrap.append(onload(trigger));
-				} else {
-					img = $.trim(img);
-					trigger.attr('src') !== img && onload(trigger).attr('src', img);
-				}
-			} else {
-				wrap.children('img').remove();
-			}
-
-			// 设置背景颜色、背景图片
-			module.css({
-				'background-color': bgcolor ? $.trim(bgcolor) : '',
-				'background-image': bgimg ? 'url(' + $.trim(bgimg) + ')' : 'none'
-			});
-
-		},
-
-		// 创建设置对话框
-		__create: function (module) {
-
-			// 配置参数
-			var self = this;
-
-			// 配置对话框
-			$.overlay({
-				title: '设置模块图片',
-				content: function () {
-					return self.__getContent(module);
-				},
-				ok: '设置好了，看看效果',
-				onOk: function () {
-					$('.press-area-option-submit').trigger('click');
-				},
-				afterRenderUI: function (container, close) {
-					$('.press-area-option-form').on('submit', function (e) {
-						e.preventDefault();
-						self.__reflow(module);
-						close();
-					});
-				},
-				type: 'small'
+				'href': $.trim(href),
+				'data-transition': $.trim(transition),
+				'title': $.trim(title)
 			});
 
 		},
@@ -331,14 +240,13 @@ define(function (require) {
 			var formdata = new FormData();
 
 			//设置参数
-			formdata.append('nick', press.nick);
+			formdata.append('nick', '邦彦');
 			formdata.append('session_id', new Date().getTime());
 			formdata.append('photo', file);
 
 			$.ajax({
 				dataType: 'json',
-				// todo
-				url: '../tests/upload.php',
+				url: './apm/upload.php',
 				type: 'post',
 				data: formdata,
 				processData: false,
@@ -354,55 +262,74 @@ define(function (require) {
 
 		},
 
+		// 填充部件图片
+		__append: function (trigger, url) {
+
+			var img = $('<img src="' + url + '" alt="">');
+
+			trigger.remove('img');
+			trigger.append(img.load(function () {
+
+				var height = img.height(),
+					head = $('.apm-area-head'),
+					body = $('.apm-area-body'),
+					foot = $('.apm-area-foot');
+
+				// 重置页头或页尾高度
+				trigger.height(height);
+
+				// 如果是页头，调整上偏移
+				if (trigger.hasClass('apm-area-head')) {
+					body.css('top', height);
+				}
+
+				// 如果是页尾，调整下偏移
+				if (trigger.hasClass('apm-area-foot')) {
+					body.css('bottom', height);
+				}
+
+			}));
+
+		},
+
 		// 绑定热区操作
 		__bind: function () {
 
 			var self = this, doc = $(document);
 
-			// 图片选项
-			doc.on('click', '.press-area-option', function () {
+			// 添加页头、页尾
+			$('.head-add, .foot-add').on('change', function (e) {
 
-				var module = $(this).parents('.J_Module').find('.press-area');
-				self.__create(module);
-
-			});
-
-			// 图片上传
-			doc.on('change', '.press-area-file input', function (e) {
-
-				var text = $(this).parents('.press-area-file').siblings('.press-form-text');
+				var trigger = $($(this).attr('data-area'));
 				self.__upload(e.currentTarget.files[0], function (url) {
-					text.val(url);
+					self.__append(trigger, url);
 				});
 
 			});
 
 			// 添加热区
-			doc.on('click', '.press-area-add', function () {
+			$('.area-add').on('click', function () {
 
-				var wrap = $(this).parents('.J_Module').find('.press-area-wrap');
-				if (wrap.children('.press-area-mask').length === 0) {
-					self.__select(wrap);
+				var container = $($(this).attr('data-area'));
+				if (container.children('.apm-area-mask').length === 0) {
+					self.__select(container);
 				}
 
 			});
 
 			// 保存所有热区
-			doc.on('click', '.press-area-save', function () {
-
-				var wrap = $(this).parents('.J_Module').find('.press-area');
-				self.__setAreas(wrap);
-
+			doc.on('click', '.area-save', function () {
+				self.__setAreas();
 			});
 
 		},
 
 		// 保存所有热区
-		__setAreas: function (module) {
+		__setAreas: function () {
 
 			var self = this,
 				list = [];
-			module.find('.press-area-item').each(function (k, v) {
+			module.find('.apm-area-item').each(function (k, v) {
 				list.push(self.__attr($(v)));
 			});
 
@@ -412,8 +339,6 @@ define(function (require) {
 				// todo
 				url: '../tests/setAreas.php',
 				data: {
-					page: press.page,
-					guid: module.parents('.J_Module').attr('data-guid'),
 					data: JSON.stringify({
 						'option': '',
 						'list': list
@@ -439,13 +364,13 @@ define(function (require) {
 		},
 
 		// 设置原始热区
-		render: function (module) {
+		render: function (container) {
 
 			var self = this,
-				_module = module ? $(module) : $('.press-area');
+				_container = container ? $(container) : $('.apm-area');
 
 			// 遍历并渲染原始热区
-			_module.find('.press-area-item').each(function (k, v) {
+			_container.find('.apm-area-item').each(function (k, v) {
 				self.__build($(v));
 			});
 
@@ -461,4 +386,6 @@ define(function (require) {
 
 	};
 
-});
+	apm.init();
+
+})(jQuery);
